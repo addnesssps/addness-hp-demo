@@ -1,22 +1,24 @@
+import Image from "next/image";
+
 export default function Hero() {
   return (
-    <section className="hero-bg relative flex min-h-screen items-center justify-center overflow-hidden">
-      {/* Decorative orbs */}
-      <div className="absolute top-1/4 left-1/4 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl" />
-      <div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-400/5 blur-2xl" />
-
-      {/* Grid pattern overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+      {/* Background image */}
+      <Image
+        src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
+        alt=""
+        fill
+        className="object-cover"
+        priority
       />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/70 to-slate-900/90" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
+      {/* Decorative orbs */}
+      <div className="absolute top-1/4 left-1/4 h-72 w-72 rounded-full bg-cyan-500/15 blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl" />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-6 text-center">
         <p className="animate-fade-in-up mb-6 text-sm font-semibold tracking-widest text-cyan-300 uppercase">
           生成AIイノベーションのグローバルリーダー
         </p>
@@ -46,10 +48,30 @@ export default function Hero() {
           </a>
           <a
             href="#about"
-            className="rounded-full border border-white/20 px-8 py-4 text-base font-semibold text-white transition-all hover:border-white/40 hover:bg-white/5"
+            className="rounded-full border border-white/20 bg-white/5 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10"
           >
             会社概要
           </a>
+        </div>
+
+        {/* Floating badge cards */}
+        <div className="animate-fade-in-up delay-500 mt-16 flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+          {[
+            { icon: "🎓", label: "SkillPlus", sub: "スキル習得" },
+            { icon: "🤖", label: "Addness AI", sub: "行動支援OS" },
+            { icon: "📚", label: "Success Learning", sub: "学習支援" },
+          ].map((badge) => (
+            <div
+              key={badge.label}
+              className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-2.5 backdrop-blur-md"
+            >
+              <span className="text-lg">{badge.icon}</span>
+              <div className="text-left">
+                <p className="text-xs font-semibold text-white">{badge.label}</p>
+                <p className="text-[10px] text-white/50">{badge.sub}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

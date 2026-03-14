@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 const testimonials = [
@@ -8,7 +9,7 @@ const testimonials = [
     role: "フリーランス / Webデザイナー",
     content:
       "SkillPlusでAIスキルを身につけてから、作業効率が3倍になりました。クライアントへの提案の幅も広がり、単価アップにもつながっています。",
-    avatar: "T",
+    avatar: "https://i.pravatar.cc/150?img=11",
     color: "from-cyan-500 to-blue-500",
   },
   {
@@ -16,7 +17,7 @@ const testimonials = [
     role: "株式会社○○ / マーケティング部長",
     content:
       "法人AI研修を導入してから、チーム全体のAIリテラシーが向上しました。業務改善の提案が自然と増え、部門の生産性が目に見えて上がっています。",
-    avatar: "S",
+    avatar: "https://i.pravatar.cc/150?img=5",
     color: "from-blue-500 to-indigo-500",
   },
   {
@@ -24,7 +25,7 @@ const testimonials = [
     role: "起業家 / スタートアップCEO",
     content:
       "Addness AIで事業計画の設計から実行管理まで一元化できています。迷いなくアクションに集中できるようになり、MRR100万円を達成しました。",
-    avatar: "I",
+    avatar: "https://i.pravatar.cc/150?img=12",
     color: "from-teal-500 to-cyan-500",
   },
 ];
@@ -57,7 +58,7 @@ export default function Testimonials() {
     <section
       id="testimonials"
       ref={sectionRef}
-      className="bg-card-bg py-24 sm:py-32"
+      className="bg-white py-24 sm:py-32"
     >
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-16 text-center">
@@ -76,9 +77,18 @@ export default function Testimonials() {
           {testimonials.map((t, i) => (
             <div
               key={t.name}
-              className="testimonial-card card-hover rounded-2xl border border-gray-100 bg-white p-8 shadow-sm"
+              className="testimonial-card card-hover relative rounded-2xl border border-gray-100 bg-white p-8 shadow-sm"
               style={{ transitionDelay: `${i * 150}ms` }}
             >
+              {/* Quote mark */}
+              <svg
+                className="absolute top-6 right-6 h-8 w-8 text-primary/10"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+
               <div className="mb-6 flex gap-1">
                 {[...Array(5)].map((_, j) => (
                   <svg
@@ -96,12 +106,14 @@ export default function Testimonials() {
                 &ldquo;{t.content}&rdquo;
               </p>
 
-              <div className="flex items-center gap-3">
-                <div
-                  className={`flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br ${t.color} text-sm font-bold text-white`}
-                >
-                  {t.avatar}
-                </div>
+              <div className="flex items-center gap-3 border-t border-gray-100 pt-6">
+                <Image
+                  src={t.avatar}
+                  alt={t.name}
+                  width={44}
+                  height={44}
+                  className="rounded-full"
+                />
                 <div>
                   <p className="text-sm font-semibold text-foreground">
                     {t.name}
