@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 
 const testimonials = [
   {
@@ -10,7 +7,6 @@ const testimonials = [
     content:
       "SkillPlusでAIスキルを身につけてから、作業効率が3倍になりました。クライアントへの提案の幅も広がり、単価アップにもつながっています。",
     avatar: "https://i.pravatar.cc/150?img=11",
-    color: "from-cyan-500 to-blue-500",
   },
   {
     name: "佐藤 花子",
@@ -18,7 +14,6 @@ const testimonials = [
     content:
       "法人AI研修を導入してから、チーム全体のAIリテラシーが向上しました。業務改善の提案が自然と増え、部門の生産性が目に見えて上がっています。",
     avatar: "https://i.pravatar.cc/150?img=5",
-    color: "from-blue-500 to-indigo-500",
   },
   {
     name: "鈴木 一郎",
@@ -26,50 +21,22 @@ const testimonials = [
     content:
       "Addness AIで事業計画の設計から実行管理まで一元化できています。迷いなくアクションに集中できるようになり、MRR100万円を達成しました。",
     avatar: "https://i.pravatar.cc/150?img=12",
-    color: "from-teal-500 to-cyan-500",
   },
 ];
 
 export default function Testimonials() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("section-visible");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const cards = sectionRef.current?.querySelectorAll(".testimonial-card");
-    cards?.forEach((card) => {
-      card.classList.add("section-hidden");
-      observer.observe(card);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section
-      id="testimonials"
-      ref={sectionRef}
-      className="bg-white py-24 sm:py-32"
-    >
+    <section id="testimonials" className="bg-white py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-16 text-center">
+        <div className="mb-16 text-center" data-reveal>
           <p className="mb-3 text-sm font-semibold tracking-widest text-primary uppercase">
             Testimonials
           </p>
-          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
+          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
             お客様の声
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted">
-            アドネスのサービスをご利用いただいたお客様の声をご紹介します
+            サービスをご利用いただいたお客様の声をご紹介します
           </p>
         </div>
 
@@ -77,12 +44,16 @@ export default function Testimonials() {
           {testimonials.map((t, i) => (
             <div
               key={t.name}
-              className="testimonial-card card-hover relative rounded-2xl border border-gray-100 bg-white p-8 shadow-sm"
-              style={{ transitionDelay: `${i * 150}ms` }}
+              className="card-hover group relative rounded-2xl border border-gray-100 bg-white p-8 shadow-sm"
+              data-reveal
+              data-reveal-delay={i * 120}
             >
-              {/* Quote mark */}
+              {/* Accent line */}
+              <div className="absolute top-0 left-8 right-8 h-1 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 transition-opacity group-hover:opacity-100" />
+
+              {/* Quote */}
               <svg
-                className="absolute top-6 right-6 h-8 w-8 text-primary/10"
+                className="mb-6 h-8 w-8 text-primary/15"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -93,7 +64,7 @@ export default function Testimonials() {
                 {[...Array(5)].map((_, j) => (
                   <svg
                     key={j}
-                    className="h-5 w-5 text-amber-400"
+                    className="h-4 w-4 text-amber-400"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -102,22 +73,20 @@ export default function Testimonials() {
                 ))}
               </div>
 
-              <p className="mb-6 text-sm leading-relaxed text-muted">
+              <p className="mb-8 text-sm leading-relaxed text-muted">
                 &ldquo;{t.content}&rdquo;
               </p>
 
-              <div className="flex items-center gap-3 border-t border-gray-100 pt-6">
+              <div className="flex items-center gap-4 border-t border-gray-100 pt-6">
                 <Image
                   src={t.avatar}
                   alt={t.name}
-                  width={44}
-                  height={44}
-                  className="rounded-full"
+                  width={48}
+                  height={48}
+                  className="rounded-full ring-2 ring-gray-100"
                 />
                 <div>
-                  <p className="text-sm font-semibold text-foreground">
-                    {t.name}
-                  </p>
+                  <p className="text-sm font-bold text-foreground">{t.name}</p>
                   <p className="text-xs text-muted">{t.role}</p>
                 </div>
               </div>

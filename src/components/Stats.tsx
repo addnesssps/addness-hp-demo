@@ -1,12 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { value: 5000, suffix: "+", label: "ユーザー数", description: "Addness AIの利用者" },
-  { value: 2, suffix: "件", label: "特許取得", description: "動的カリキュラム技術" },
-  { value: 1, suffix: "位", label: "Amazon ビジネス書", description: "「賢く生きる習慣」" },
-  { value: 871, suffix: "名", label: "調査対象", description: "スキル習得満足度調査" },
+  { value: 5000, suffix: "+", label: "ユーザー数", sub: "Addness AI 利用者", icon: "👥" },
+  { value: 2, suffix: "件", label: "特許取得", sub: "動的カリキュラム技術", icon: "📜" },
+  { value: 1, suffix: "位", label: "Amazonベストセラー", sub: "「賢く生きる習慣」", icon: "📕" },
+  { value: 871, suffix: "名", label: "調査実施", sub: "スキル習得満足度調査", icon: "📊" },
 ];
 
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
@@ -51,36 +52,41 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 
 export default function Stats() {
   return (
-    <section
-      id="stats"
-      className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-cyan-900 py-24 sm:py-32"
-    >
-      <div className="absolute top-0 left-1/3 h-80 w-80 rounded-full bg-cyan-500/5 blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-blue-500/5 blur-3xl" />
+    <section className="section-divider-wave relative overflow-hidden pb-32 pt-28 sm:pt-36">
+      <Image
+        src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop"
+        alt=""
+        fill
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-cyan-900/90" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
-        <div className="mb-16 text-center">
+        <div className="mb-16 text-center" data-reveal>
           <p className="mb-3 text-sm font-semibold tracking-widest text-cyan-300 uppercase">
             Achievements
           </p>
-          <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
             数字で見るアドネス
           </h2>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat, i) => (
             <div
               key={stat.label}
-              className="rounded-2xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur-sm"
+              className="group rounded-2xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/20 hover:bg-white/10"
+              data-reveal
+              data-reveal-delay={i * 100}
             >
-              <div className="gradient-text mb-2 text-4xl font-extrabold sm:text-5xl">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-2xl transition-transform duration-300 group-hover:scale-110">
+                {stat.icon}
+              </div>
+              <div className="gradient-text mb-2 text-4xl font-black sm:text-5xl">
                 <CountUp target={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="mb-1 text-lg font-semibold text-white">
-                {stat.label}
-              </p>
-              <p className="text-sm text-white/50">{stat.description}</p>
+              <p className="mb-1 text-base font-semibold text-white">{stat.label}</p>
+              <p className="text-xs text-white/40">{stat.sub}</p>
             </div>
           ))}
         </div>
