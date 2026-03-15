@@ -47,13 +47,8 @@ export default function About() {
           {/* CEO message */}
           <div className="rounded-2xl border border-gray-100 bg-card-bg p-8 sm:p-10 lg:col-span-2" data-reveal="left">
             <div className="mb-8 flex items-center gap-4">
-              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl">
-                <Image
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&auto=format&fit=crop"
-                  alt="代表取締役社長 三上 功太"
-                  fill
-                  className="object-cover"
-                />
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-2xl font-black text-white shadow-lg shadow-cyan-500/20">
+                K
               </div>
               <div>
                 <p className="text-xs font-medium text-muted">代表取締役社長</p>
